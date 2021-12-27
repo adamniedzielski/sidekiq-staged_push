@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "sidekiq/staged_push/version"
 
 module Sidekiq
