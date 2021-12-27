@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-require "sidekiq/staged_push/client"
+require "sidekiq/staged_push/worker"
 require "sidekiq/staged_push/version"
 
 module Sidekiq
   module StagedPush
-    class Error < StandardError; end
-    # Your code goes here...
+    def self.enable!
+      Sidekiq::Worker::ClassMethods.prepend Sidekiq::StagedPush::Worker::ClassMethods
+    end
   end
 end
