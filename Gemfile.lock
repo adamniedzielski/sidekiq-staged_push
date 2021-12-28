@@ -65,6 +65,7 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    sqlite3 (1.4.2)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
@@ -79,6 +80,7 @@ DEPENDENCIES
   rubocop
   rubocop-rspec
   sidekiq-staged_push!
+  sqlite3
 
 BUNDLED WITH
    2.2.22
