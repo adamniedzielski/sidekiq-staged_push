@@ -14,10 +14,12 @@ RSpec.describe Sidekiq::StagedPush do
       end
 
       allow(Sidekiq::StagedPush::Client).to receive_message_chain(:new, :push)
+      allow(Sidekiq::Client).to receive_message_chain(:new, :push)
 
       worker_class.perform_async
       job_class.perform_async
 
+      expect(Sidekiq::Client).to have_received(:new).twice
       expect(Sidekiq::StagedPush::Client).not_to have_received(:new)
 
       described_class.enable!
