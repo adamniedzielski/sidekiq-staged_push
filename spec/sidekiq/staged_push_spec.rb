@@ -9,26 +9,22 @@ RSpec.describe Sidekiq::StagedPush do
       worker_class = Class.new do
         include Sidekiq::Worker
       end
-
-      allow(Sidekiq::StagedPush::Client).to receive_message_chain(:new, :push)
-
-      described_class.enable!
-      worker_class.perform_async
-
-      expect(Sidekiq::StagedPush::Client).to have_received(:new)
-    end
-
-    it "works the same with Sidekiq::Job" do
-      worker_class = Class.new do
+      job_class = Class.new do
         include Sidekiq::Job
       end
 
       allow(Sidekiq::StagedPush::Client).to receive_message_chain(:new, :push)
 
+      worker_class.perform_async
+      job_class.perform_async
+
+      expect(Sidekiq::StagedPush::Client).not_to have_received(:new)
+
       described_class.enable!
       worker_class.perform_async
+      job_class.perform_async
 
-      expect(Sidekiq::StagedPush::Client).to have_received(:new)
+      expect(Sidekiq::StagedPush::Client).to have_received(:new).twice
     end
   end
 end

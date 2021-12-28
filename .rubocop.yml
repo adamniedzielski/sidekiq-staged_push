@@ -19,3 +19,5 @@ RSpec/MessageChain:
   Enabled: false
 RSpec/ExampleLength:
   Max: 50
+RSpec/MultipleExpectations:
+  Enabled: false
