@@ -6,6 +6,8 @@ AllCops:
   TargetRubyVersion: 2.7
   SuggestExtensions:
     rubocop-rake: false
+  Exclude:
+    - "db/**/*"
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
