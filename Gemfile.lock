@@ -8,6 +8,19 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    actionpack (7.0.0)
+      actionview (= 7.0.0)
+      activesupport (= 7.0.0)
+      rack (~> 2.0, >= 2.2.0)
+      rack-test (>= 0.6.3)
+      rails-dom-testing (~> 2.0)
+      rails-html-sanitizer (~> 1.0, >= 1.2.0)
+    actionview (7.0.0)
+      activesupport (= 7.0.0)
+      builder (~> 3.1)
+      erubi (~> 1.4)
+      rails-dom-testing (~> 2.0)
+      rails-html-sanitizer (~> 1.1, >= 1.2.0)
     activemodel (7.0.0)
       activesupport (= 7.0.0)
     activerecord (7.0.0)
@@ -19,16 +32,42 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
     ast (2.4.2)
+    builder (3.2.4)
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
+    crass (1.0.6)
     diff-lcs (1.5.0)
+    erubi (1.10.0)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
+    loofah (2.13.0)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.5.9)
+    method_source (1.0.0)
     minitest (5.15.0)
+    nokogiri (1.12.5-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.12.5-x86_64-linux)
+      racc (~> 1.4)
     parallel (1.21.0)
     parser (3.0.3.2)
       ast (~> 2.4.1)
+    racc (1.6.0)
     rack (2.2.3)
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
+    rails-dom-testing (2.0.3)
+      activesupport (>= 4.2.0)
+      nokogiri (>= 1.6)
+    rails-html-sanitizer (1.4.2)
+      loofah (~> 2.3)
+    railties (7.0.0)
+      actionpack (= 7.0.0)
+      activesupport (= 7.0.0)
+      method_source
+      rake (>= 12.2)
+      thor (~> 1.0)
+      zeitwerk (~> 2.5)
     rainbow (3.0.0)
     rake (13.0.6)
     redis (4.5.1)
@@ -66,9 +105,11 @@ GEM
       rack (~> 2.0)
       redis (>= 4.2.0)
     sqlite3 (1.4.2)
+    thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
+    zeitwerk (2.5.2)
 
 PLATFORMS
   x86_64-darwin-20
@@ -76,6 +117,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler
+  railties
   rake
   rspec
   rubocop
