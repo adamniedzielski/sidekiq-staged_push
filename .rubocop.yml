@@ -8,6 +8,7 @@ AllCops:
     rubocop-rake: false
   Exclude:
     - "db/**/*"
+    - "vendor/**/*"
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
