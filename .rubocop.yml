@@ -24,3 +24,7 @@ RSpec/ExampleLength:
   Max: 50
 RSpec/MultipleExpectations:
   Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+    - "*.gemspec"
