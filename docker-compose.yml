@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  library:
+    build:
+      context: .
+    stdin_open: true
+    tty: true
+    volumes:
+      - ".:/library"
+      - bundle:/bundle
+volumes:
+  bundle:
