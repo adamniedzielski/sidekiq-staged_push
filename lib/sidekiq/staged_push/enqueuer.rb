@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
-require "sidekiq/staged_push/staged_job"
-require "sidekiq/client"
+require "sidekiq/staged_push/enqueuer/process_batch"
 
 module Sidekiq
   module StagedPush
     class Enqueuer
-      BATCH_SIZE = 500
-
       def initialize
         @done = false
       end
@@ -25,19 +22,8 @@ module Sidekiq
       def process
         until @done
           if primary_process?
-            StagedJob.transaction do
-              jobs = StagedJob.order(:id).limit(BATCH_SIZE).to_a
-
-              if jobs.present?
-                client = Sidekiq::Client.new
-                jobs.each do |job|
-                  client.push(job.payload)
-                end
-                StagedJob.where(id: jobs.map(&:id)).delete_all
-              else
-                sleep 0.2
-              end
-            end
+            jobs_processed = ProcessBatch.new.call
+            sleep 0.2 if jobs_processed.zero?
           else
             sleep 30
           end
