@@ -31,6 +31,12 @@ In `config/initializers/sidekiq.rb`:
 Sidekiq::StagedPush.enable!
 ```
 
+## Gotchas
+
+1. The gem currently assumes that you're running only one Sidekiq process or using Sidekiq
+Enterprise. Jobs may be processed multiple times if this is not true.
+2. `SomeWorker.perform_bulk([[1], [2], [3]])` is inconsistent with other methods, because it
+schedules to Redis immediately.
 
 ## Development
 
