@@ -36,6 +36,10 @@ GEM
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
     crass (1.0.6)
+    database_cleaner-active_record (2.0.1)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     diff-lcs (1.5.0)
     erubi (1.10.0)
     i18n (1.8.11)
@@ -117,6 +121,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler
+  database_cleaner-active_record
   railties
   rake
   rspec
@@ -126,4 +131,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   2.2.22
+   2.2.32

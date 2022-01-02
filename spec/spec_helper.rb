@@ -4,11 +4,16 @@ require "bundler/setup"
 require "sidekiq/staged_push"
 require "active_record"
 require "rails/generators"
+require "database_cleaner/active_record"
 
-ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"
+db_directory = Pathname.new(File.expand_path("../db/", File.dirname(__FILE__)))
+db_file = db_directory.join("test.sqlite3")
+
+File.delete(db_file) if File.exist?(db_file)
+
+ActiveRecord::Base.establish_connection adapter: "sqlite3", database: db_file
 Rails::Generators.invoke("sidekiq:staged_push:install", ["--force"])
-migrations_path = File.expand_path("../db/migrate/", File.dirname(__FILE__))
-ActiveRecord::MigrationContext.new(migrations_path, ActiveRecord::SchemaMigration).migrate
+ActiveRecord::MigrationContext.new(db_directory.join("migrate"), ActiveRecord::SchemaMigration).migrate
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -19,5 +24,15 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
   end
 end
