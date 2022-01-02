@@ -12,6 +12,7 @@ It is developed based on the approach described in [Transactionally Staged Job D
 
 This allows you to leverage the power of Sidekiq while still treating your jobs as if they
 were stored in the database for the purpose of transactions.
+[See the demo app](https://github.com/adamniedzielski/sidekiq-staged_push-demo).
 
 ## Installation
 
