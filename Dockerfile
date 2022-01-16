@@ -1,4 +1,4 @@
-FROM ruby:3.0.3-alpine
+FROM ruby:3.1.0-alpine
 RUN apk add build-base sqlite-dev tzdata git bash
 WORKDIR /library
 ENV BUNDLE_PATH=/bundle \
