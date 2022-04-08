@@ -32,6 +32,12 @@ In `config/initializers/sidekiq.rb`:
 Sidekiq::StagedPush.enable!
 ```
 
+And finally, create the tables:
+
+    $ rails generate sidekiq:staged_push:install
+    $ rails db:migrate
+
+
 ## Gotchas
 
 1. The gem currently assumes that you're running only one Sidekiq process or using Sidekiq
