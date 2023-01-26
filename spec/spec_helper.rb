@@ -9,7 +9,9 @@ require "database_cleaner/active_record"
 db_directory = Pathname.new(File.expand_path("../db/", File.dirname(__FILE__)))
 db_file = db_directory.join("test.sqlite3")
 
-FileUtils.rm_f(db_file)
+# rubocop:disable Lint/NonAtomicFileOperation
+File.delete(db_file) if File.exist?(db_file)
+# rubocop:enable Lint/NonAtomicFileOperation
 
 ActiveRecord::Base.establish_connection adapter: "sqlite3", database: db_file
 Rails::Generators.invoke("sidekiq:staged_push:install", ["--force"])
