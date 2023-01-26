@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = ">= 2.7.5"
 
   spec.add_dependency "activerecord", ">= 5.2.0"
-  spec.add_dependency "sidekiq", ">= 6.3.1"
+  spec.add_dependency "sidekiq", ">= 6.5.0", "<7"
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "database_cleaner-active_record"
   spec.add_development_dependency "railties"
