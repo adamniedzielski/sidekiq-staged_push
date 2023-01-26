@@ -11,7 +11,7 @@ RSpec.describe Sidekiq::StagedPush::Client do
       item = { "class" => TestJob, "args" => [11] }
 
       expect { client.push(item) }
-        .to change { Sidekiq::StagedPush::StagedJob.count }
+        .to change(Sidekiq::StagedPush::StagedJob, :count)
         .by(1)
 
       job = Sidekiq::StagedPush::StagedJob.last
