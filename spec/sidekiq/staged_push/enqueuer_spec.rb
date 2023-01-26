@@ -10,7 +10,7 @@ RSpec.describe Sidekiq::StagedPush::Enqueuer do
     job = Sidekiq::StagedPush::StagedJob.create!(payload: { args: [1] })
     sleep 1
 
-    expect(Sidekiq::StagedPush::StagedJob.find_by(id: job.id)).to eq nil
+    expect(Sidekiq::StagedPush::StagedJob.find_by(id: job.id)).to be_nil
 
     enqueuer.stop
     sleep 1
