@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "sidekiq/worker"
 require "sidekiq/job"
 
 RSpec.describe Sidekiq::StagedPush do
