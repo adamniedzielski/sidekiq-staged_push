@@ -17,5 +17,19 @@ RSpec.describe Sidekiq::StagedPush::Client do
       job = Sidekiq::StagedPush::StagedJob.last
       expect(job.payload).to eq("class" => "TestJob", "args" => [11])
     end
+
+    it "forwards to Sidekiq::Client if pushed in bulk" do
+      mock_redis_client = instance_double(Sidekiq::Client, push_bulk: nil)
+      allow(Sidekiq::Client).to receive(:new).and_return(mock_redis_client)
+
+      client = described_class.new
+      first_item = { "class" => TestJob, "args" => [11] }
+      second_item = { "class" => TestJob, "args" => [12] }
+
+      expect { client.push_bulk([first_item, second_item]) }
+        .to_not change(Sidekiq::StagedPush::StagedJob, :count)
+
+      expect(mock_redis_client).to have_received(:push_bulk).with([first_item, second_item])
+    end
   end
 end

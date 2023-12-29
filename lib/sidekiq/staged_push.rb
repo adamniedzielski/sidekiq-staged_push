@@ -2,14 +2,15 @@
 
 require "sidekiq"
 require "sidekiq/job"
+require "sidekiq/staged_push/client"
 require "sidekiq/staged_push/enqueuer"
-require "sidekiq/staged_push/worker"
 require "sidekiq/staged_push/version"
 
 module Sidekiq
   module StagedPush
     def self.enable!
-      Sidekiq::Worker::ClassMethods.prepend Sidekiq::StagedPush::Worker::ClassMethods
+      Sidekiq.default_job_options["client_class"] = Sidekiq::StagedPush::Client
+      Sidekiq::JobUtil::TRANSIENT_ATTRIBUTES << "client_class"
 
       enqueuer = Enqueuer.new
       Sidekiq.configure_server do |config|
