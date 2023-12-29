@@ -27,7 +27,7 @@ RSpec.describe Sidekiq::StagedPush::Client do
       second_item = { "class" => TestJob, "args" => [12] }
 
       expect { client.push_bulk([first_item, second_item]) }
-        .to_not change(Sidekiq::StagedPush::StagedJob, :count)
+        .not_to change(Sidekiq::StagedPush::StagedJob, :count)
 
       expect(mock_redis_client).to have_received(:push_bulk).with([first_item, second_item])
     end
