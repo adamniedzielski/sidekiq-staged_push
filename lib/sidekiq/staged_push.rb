@@ -12,9 +12,9 @@ module Sidekiq
       Sidekiq.default_job_options["client_class"] = Sidekiq::StagedPush::Client
       Sidekiq::JobUtil::TRANSIENT_ATTRIBUTES << "client_class"
 
-      enqueuer = Enqueuer.new
       Sidekiq.configure_server do |config|
         config.on(:startup) do
+          enqueuer = Enqueuer.new(config)
           enqueuer.start
         end
         config.on(:quiet) do
