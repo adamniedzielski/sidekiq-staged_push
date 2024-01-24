@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
+require "sidekiq/component"
 require "sidekiq/staged_push/enqueuer/process_batch"
 
 module Sidekiq
   module StagedPush
     class Enqueuer
-      def initialize
+      include Sidekiq::Component
+
+      def initialize(config)
         @done = false
+        @config = config
       end
 
       def start
@@ -33,7 +37,7 @@ module Sidekiq
       def primary_process?
         return true unless defined?(Sidekiq::Enterprise)
 
-        Sidekiq::Senate.leader?
+        leader?
       end
     end
   end

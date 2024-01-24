@@ -4,7 +4,7 @@ RSpec.describe Sidekiq::StagedPush::Enqueuer do
   it "can be started and stopped" do
     allow(Sidekiq::Client).to receive_message_chain(:new, :push)
 
-    enqueuer = described_class.new
+    enqueuer = described_class.new("config")
     enqueuer.start
 
     job = Sidekiq::StagedPush::StagedJob.create!(payload: { args: [1] })
