@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sidekiq-staged_push (0.3.0)
+    sidekiq-staged_push (0.3.1)
       activerecord (>= 5.2.0)
       sidekiq (>= 6.5.0)
 
@@ -106,7 +106,7 @@ GEM
     rake (13.1.0)
     rdoc (6.6.2)
       psych (>= 4.0.0)
-    redis-client (0.19.1)
+    redis-client (0.22.2)
       connection_pool
     regexp_parser (2.8.3)
     reline (0.4.1)
@@ -148,11 +148,11 @@ GEM
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
-    sidekiq (7.2.0)
+    sidekiq (7.2.4)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
-      redis-client (>= 0.14.0)
+      redis-client (>= 0.19.0)
     sqlite3 (1.7.0-x86_64-darwin)
     sqlite3 (1.7.0-x86_64-linux)
     stringio (3.1.0)
