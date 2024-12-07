@@ -25,19 +25,15 @@ module Sidekiq
 
       def process
         until @done
-          if primary_process?
-            jobs_processed = ProcessBatch.new.call
-            sleep 0.2 if jobs_processed.zero?
-          else
+          begin
+            StagedJob.with_advisory_lock!("sidekiq_staged_push", { timeout_seconds: 0 }) do
+              jobs_processed = ProcessBatch.new.call
+              sleep 0.2 if jobs_processed.zero?
+            end
+          rescue WithAdvisoryLock::FailedToAcquireLock
             sleep 30
           end
         end
-      end
-
-      def primary_process?
-        return true unless defined?(Sidekiq::Enterprise)
-
-        leader?
       end
     end
   end
