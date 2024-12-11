@@ -6,8 +6,8 @@ require "sidekiq/staged_push/staged_job"
 module Sidekiq
   module StagedPush
     class Client
-      def initialize(pool: nil, config: nil)
-        @redis_client = Sidekiq::Client.new(pool: pool, config: config)
+      def initialize(*args, **kwargs)
+        @redis_client = Sidekiq::Client.new(*args, **kwargs)
       end
 
       def push(item)
