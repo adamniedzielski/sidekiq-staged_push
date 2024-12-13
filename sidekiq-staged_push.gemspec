@@ -31,4 +31,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "activerecord", ">= 5.2.0"
   spec.add_dependency "sidekiq", ">= 6.5.0"
+  spec.add_dependency "with_advisory_lock", ">= 5.1.0"
 end
